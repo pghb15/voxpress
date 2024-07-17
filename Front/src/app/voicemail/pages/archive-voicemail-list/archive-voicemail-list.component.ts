@@ -10,6 +10,8 @@ import { Voicemail } from '../../models/voicemail';
 export class ArchivedVoicemailListComponent implements OnInit {
   voicemailList: Voicemail[] = [];
   tempVoicemail: Voicemail = new Voicemail();
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
 
   constructor(private voicemailService: VoicemailService) {}
 
@@ -24,7 +26,45 @@ export class ArchivedVoicemailListComponent implements OnInit {
   }
 
   openModel(voicemail: Voicemail) {
-    // Create a copy of the voicemail object to prevent direct modifications
     this.tempVoicemail = { ...voicemail };
+  }
+
+  // Pagination methods
+  totalPages(): number[] {
+    const pages = Math.ceil(this.voicemailList.length / this.itemsPerPage);
+    return Array.from({ length: pages }, (_, i) => i + 1);
+  }
+
+  setCurrentPage(page: number, event: Event): void {
+    event.preventDefault();
+    this.currentPage = page;
+  }
+
+  prevPage(event: Event): void {
+    event.preventDefault();
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage(event: Event): void {
+    event.preventDefault();
+    if (this.currentPage < this.totalPages().length) {
+      this.currentPage++;
+    }
+  }
+
+  hasPrevPage(): boolean {
+    return this.currentPage > 1;
+  }
+
+  hasNextPage(): boolean {
+    return this.currentPage < this.totalPages().length;
+  }
+
+  paginatedVoicemailList(): Voicemail[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.voicemailList.slice(start, end);
   }
 }

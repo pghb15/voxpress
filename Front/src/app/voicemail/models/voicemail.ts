@@ -11,6 +11,7 @@ export class Voicemail {
   type: string
   recordingUrl: string
   transcription: string
+  commentary: string
   user: any
 
   constructor() {
@@ -24,6 +25,7 @@ export class Voicemail {
     this.type = '';
     this.recordingUrl = '';
     this.transcription = '';
+    this.commentary = '';
     this.user = new User();
   }
 }
