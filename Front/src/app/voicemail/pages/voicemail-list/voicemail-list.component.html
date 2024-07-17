@@ -1,0 +1,174 @@
+<button
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#EditAddVoicemail"
+  (click)="openModel()"
+  style="margin: 50px"
+>
+  Register Voicemail
+</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Contact ID</th>
+      <th scope="col">Date</th>
+      <th scope="col">Customer Number</th>
+      <th scope="col">Language</th>
+      <th scope="col" colspan="2">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let voicemail of voicemailList">
+      <td scope="row">{{ voicemail.contactId }}</td>
+      <td scope="row">{{ voicemail.date }}</td>
+      <td scope="row">{{ voicemail.phone }}</td>
+      <td scope="row">{{ voicemail.language }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-dark"
+          data-toggle="modal"
+          data-target="#EditAddVoicemail"
+          (click)="openModel(voicemail)"
+        >
+          <i class="fa fa-list" aria-hidden="true"></i> Follow up
+        </button>
+      </td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="archiveVoicemail(voicemail)"
+        >
+          <i class="fa fa-archive" aria-hidden="true"></i> Archive
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="EditAddVoicemail"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" voicemail="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Voicemail</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">ContactId</span>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="tempVoicemail.contactId" name="contactId" required #contactId="ngModel" />
+          <div *ngIf="contactId.invalid && (contactId.dirty || contactId.touched)" class="invalid-feedback d-block">
+            Contact ID is required.
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Date</span>
+          </div>
+          <input type="datetime-local" class="form-control" [(ngModel)]="tempVoicemail.date" name="date" required #date="ngModel" />
+            <div *ngIf="date.invalid && (date.dirty || date.touched)" class="invalid-feedback d-block">
+              Date is required.
+            </div>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Customer Number</span>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="tempVoicemail.phone" name="phone" required #phone="ngModel" />
+            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="invalid-feedback d-block">
+              Customer Number is required.
+            </div>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Language</span>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="tempVoicemail.language" name="language" required #language="ngModel" />
+            <div *ngIf="language.invalid && (language.dirty || language.touched)" class="invalid-feedback d-block">
+              Language is required.
+            </div>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Recording URL</span>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="tempVoicemail.recordingUrl" name="recordingUrl" required #recordingUrl="ngModel" />
+            <div *ngIf="recordingUrl.invalid && (recordingUrl.dirty || recordingUrl.touched)" class="invalid-feedback d-block">
+              Recording URL is required.
+            </div>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Transcription</span>
+          </div>
+          <textarea class="form-control" [(ngModel)]="tempVoicemail.transcription" name="transcription" rows="3" required #transcription="ngModel"></textarea>
+            <div *ngIf="transcription.invalid && (transcription.dirty || transcription.touched)" class="invalid-feedback d-block">
+              Transcription is required.
+            </div>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Owner</label>
+          </div>
+          <select
+            class="custom-select"
+            id="inputGroupSelect01"
+            [(ngModel)]="tempVoicemail.user.id"
+            [disabled]="disableOwnerField"
+          >
+            <option selected>Choose...</option>
+            <option *ngFor="let user of userList" [value]="user.id">
+              {{ user.userName }}
+            </option>
+          </select>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="disableOwnerCheckbox" [(ngModel)]="disableOwnerField">
+          <label class="form-check-label" for="disableOwnerCheckbox">
+            Do not assign Owner
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          *ngIf="creatingMode"
+          (click)="createVoicemail()"
+        >
+          Create Voicemail
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          *ngIf="!creatingMode"
+          (click)="modifyVoicemail()"
+        >
+          Modify Voicemail
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

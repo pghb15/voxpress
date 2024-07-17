@@ -1,0 +1,157 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Contact ID</th>
+      <th scope="col">Date</th>
+      <th scope="col">Customer Number</th>
+      <th scope="col">Language</th>
+      <th scope="col">Owner</th>
+      <th scope="col">Status</th>
+      <th scope="col" colspan="2">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let voicemail of voicemailList">
+      <td scope="row">{{ voicemail.contactId }}</td>
+      <td scope="row">{{ voicemail.date }}</td>
+      <td scope="row">{{ voicemail.phone }}</td>
+      <td scope="row">{{ voicemail.language }}</td>
+      <td scope="row">{{ voicemail.user.userName }}</td>
+      <td scope="row">{{ voicemail.status }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-dark"
+          data-toggle="modal"
+          data-target="#EditAddVoicemail"
+          (click)="openModel(voicemail)"
+        >
+          <i class="fa fa-folder-open" aria-hidden="true"></i> Review
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="EditAddVoicemail"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" voicemail="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Voicemail</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">ContactId</span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="tempVoicemail.contactId"
+            readonly
+          />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Date</span>
+          </div>
+          <input
+            type="datetime"
+            class="form-control"
+            [(ngModel)]="tempVoicemail.date"
+            readonly
+          />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Customer Number</span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="tempVoicemail.phone"
+            readonly
+          />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Language</span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="tempVoicemail.language"
+            readonly
+          />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Recording URL</span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="tempVoicemail.recordingUrl"
+            readonly
+          />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Transcription</span>
+          </div>
+          <textarea 
+            type="text"
+            class="form-control"
+            [(ngModel)]="tempVoicemail.transcription"
+            name="transcription"
+            rows="3"
+            readonly
+          ></textarea>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Owner</span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="tempVoicemail.user.userName"
+            readonly
+          />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Status</label>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="tempVoicemail.status"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
