@@ -44,30 +44,32 @@ This layer contains the external communication Services of our application. It i
       
 ## Endpoints
 
-Voicemails
-`GET /api/voicemails` to obtain all voicemails.
-`GET /api/voicemails/{contactId}` to obtain an specific voicemail.
-`GET /api/voicemails/assigned` to obtain all voicemails which attribute type is equal to assigned.
-`GET /api/voicemails/archived` to obtain all voicemails which attribute type is equal to assigned.
-`GET /api/voicemails/inbox` to obtain all voicemails which attribute type is equal to assigned.
-`POST /api/voicemails/` to create a voicemail
-`PUT /api/voicemails/{contactId}` to modify a voicemail
-`DELETE /api/voicemails/{contactId}` to delete a voicemail
+## Voicemails
+- `GET /api/voicemails` to obtain all voicemails.
+- `GET /api/voicemails/{contactId}` to obtain an specific voicemail.
+- `GET /api/voicemails/assigned` to obtain all voicemails which attribute type is equal to assigned.
+- `GET /api/voicemails/archived` to obtain all voicemails which attribute type is equal to assigned.
+- `GET /api/voicemails/inbox` to obtain all voicemails which attribute type is equal to assigned.
+- `POST /api/voicemails/` to create a voicemail
+- `PUT /api/voicemails/{contactId}` to modify a voicemail
+- `DELETE /api/voicemails/{contactId}` to delete a voicemail
 
 
-Users
-`GET /api/user` to obtain all users.
-`GET /api/user/{id}` to obtain an specific user.
-`POST /api/user/` to create a voicemail
-`PUT /api/user/{contactId}` to modify a voicemail
-`DELETE /api/use/{id}` to delete a voicemail
+## Users
 
-Roles
-`GET /api/role` to obtain all roles.
-`GET /api/role/{id}` to obtain an specific role.
-`POST /api/role/` to create a voicemail
-`PUT /api/role/{id}` to modify a voicemail
-`DELETE /api/role/{id}` to delete a voicemail
+- `GET /api/user` to obtain all users.
+- `GET /api/user/{id}` to obtain an specific user.
+`- POST /api/user/` to create a voicemail
+- `PUT /api/user/{contactId}` to modify a voicemail
+- `DELETE /api/use/{id}` to delete a voicemail
+
+## Roles
+
+- `GET /api/role` to obtain all roles.
+- `GET /api/role/{id}` to obtain an specific role.
+- `POST /api/role/` to create a voicemail
+- `PUT /api/role/{id}` to modify a voicemail
+- `DELETE /api/role/{id}` to delete a voicemail
 
 ## Contribute
 
