@@ -11,79 +11,64 @@ Run `git clone https://github.com/pghb15/voxpress.git` to clone the general repo
 Run `cd ./Back/voxpress-back`.
 
 
-Run `npm install`.
+Run `npm install` to install dependencies
 
+## Description
 
-# Proyecto XXX
+Voxpress (Back End), is a microservice developed in Spring Boot 3.1.9. It is in charge of:
 
-## Descripción
+- Create, Read, Delete, Update Users
+- Create, Read, Delete, Update Roles
+- Create, Read, Delete, Update Voicemails
 
-Proyecto XXX, es un microservicio Spring Boot 3.1.9, que hace muchas cosas....
+## Architecture
 
-## Arquitectura
+- **Domain**
+This layer contains the Services and the Business Model, and anything related to it alone.
+In the current archetypes, we only use the Anemic Model. If we want to use the Rich Model, this layer will contain the output ports, the repository, and Kafka events, not the Application layer.
 
-Para los microservicios estamos usando una Arquitectrura Hexagonal.
-Consta de 3 capas principales:
+- **Application**
+This layer contains the communication ports with the Infrastructure layer. An input port is not necessary since it is redundant in Java to call an interface if it is not going to be used for anything else.
+It also contains the services that will carry out the use cases, making use of the domain as deemed appropriate.
+Data classes do not exist in this layer as they belong to the Domain.
 
-- **Dominio**
-  Esta capa contiene los Servicios y el Modelo de Negocio, y cualquier cosa relacionada con el solamente.
-  En los arquetipos actuales solo usamos el Modeo Anémico (Anemic Model), si queremos usar el Modelo Enriquecido (Rich Model) esta capa contendra los puertos de salida, del repositorio y de los eventos kafka, y no la capa Aplicación.
+- **Infrastructure**
+This layer contains the external communication Services of our application. It is divided into the necessary packages to decouple each possible input and output. New ones can be created if necessary, but these have been predefined for these functionalities:
 
-- **Aplicación**
-  Esta capa contiene los puertos de comunicación con la capa Infrestructura, no es necesario un puerto de entrada, ya que es redundante en Java llamar a una interfaz si no se va a usar para nada mas.
-  Tambien contiene los servicios que realizaran los casos de uso, haciendo uso del domain como considere oportuno.
-  Las clases de datos en esta capa no existen ya que son el Dominio.
-
-- **Infraestructura**
-  Esta capa contiene los Servicios de comunicación externa de nuestra aplicacion. Se divide a si misma en los paquetes necesarios para desacoplar cada entrada y salida posible, se pueden crear nuevos si es necesario pero se han predefinido estos para estas funcionalidades:
-    - **ApiRest**
-      Contiene los Controladores, Dtos, Seguridad y clases necesarias para la comunicacion por Api Rest
-    - **IntegrationEvents**
-      Contiene los Consumidores, Productores y clases necesarias para la comunicacion por Eventos
-    - **Repository**
-      Contiene los Repositorios, Dtos y clases necesarias para la persistencia de datos
-
-## Diagrama de Entidad-Relacion
-
-```mermaid
-erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    ORDER ||--|{ LINE-ITEM : contains
-
-    CUSTOMER {
-        string name
-        string custNumber
-        string sector
-    }
-    ORDER {
-        int orderNumber
-        string deliveryAddress
-    }
-    LINE-ITEM {
-        string productCode
-        int quantity
-        float pricePerUnit
-    }
-```
-
+	- **ApiRest**
+	Contains the Controllers, DTOs, Security, and classes necessary for communication via Rest API.
+	- **IntegrationEvents**
+	Contains the Consumers, Producers, and classes necessary for communication via Events.
+	- **Repository**
+	Contains the Repositories, DTOs, and classes necessary for data persistence.
+      
 ## Endpoints
 
-Explicaicon de cada endpoint de la aplicacion
+Voicemails
+`GET /api/voicemails` to obtain all voicemails.
+`GET /api/voicemails/{contactId}` to obtain an specific voicemail.
+`GET /api/voicemails/assigned` to obtain all voicemails which attribute type is equal to assigned.
+`GET /api/voicemails/archived` to obtain all voicemails which attribute type is equal to assigned.
+`GET /api/voicemails/inbox` to obtain all voicemails which attribute type is equal to assigned.
+`POST /api/voicemails/` to create a voicemail
+`PUT /api/voicemails/{contactId}` to modify a voicemail
+`DELETE /api/voicemails/{contactId}` to delete a voicemail
 
-## Swagger
 
-No se necesita de ninguna configuracion adicional para configurar Swagger.
+Users
+`GET /api/user` to obtain all users.
+`GET /api/user/{id}` to obtain an specific user.
+`POST /api/user/` to create a voicemail
+`PUT /api/user/{contactId}` to modify a voicemail
+`DELETE /api/use/{id}` to delete a voicemail
 
-El endpoint que se genera para poder visualizar el Api es:
-- /swagger-ui/index.html
+Roles
+`GET /api/role` to obtain all roles.
+`GET /api/role/{id}` to obtain an specific role.
+`POST /api/role/` to create a voicemail
+`PUT /api/role/{id}` to modify a voicemail
+`DELETE /api/role/{id}` to delete a voicemail
 
-El Json con la descripcion:
-- /v3/api-docs
+## Contribute
 
-Para desactivar estas URL en entornos productivos hay que poner estas propiedades:
-- springdoc.api-docs.enabled: false
-- springdoc.swagger-ui.enabled: false
-
-## Contribuye
-
-Aqui pondriais vuestro mail o informacion de contacto.
+Send an email to phernandez@itba.edu.ar
