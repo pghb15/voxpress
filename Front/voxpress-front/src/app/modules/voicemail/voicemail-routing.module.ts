@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { VoicemailListComponent } from './pages/voicemail-list/voicemail-list.component';
 
-
+const routes: Routes = [
+  {
+    path: '',
+    component: VoicemailListComponent,
+  },
+];
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class VoicemailRoutingModule { }
