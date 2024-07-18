@@ -13,6 +13,8 @@ Run `cd ./Back/voxpress-back`.
 
 Run `npm install` to install dependencies
 
+Replace `spring.data.mongodb.uri:[MONGO_URI]` with your own connection string in the file `application.properties` in src/resources.
+
 ## Description
 
 Voxpress (Back End), is a microservice developed in Spring Boot 3.1.9. It is in charge of:
