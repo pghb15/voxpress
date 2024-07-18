@@ -1,3 +1,18 @@
+# <img src="../../Docs/Img/logo.ico" alt="logo" width="25"/> Voxpress (Front End)
+
+This project was generated with Springboot Maven Project.
+
+## Development server (local)
+
+
+Run `git clone https://github.com/pghb15/voxpress.git` to clone the general repository (front and back) in the desired location.
+
+
+Run `cd ./Back/voxpress-back`.
+
+
+Run `npm install`.
+
 
 # Proyecto XXX
 
