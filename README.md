@@ -1,7 +1,10 @@
-# Voxpress
+## Voxpress
 It's a Full Stack Application developed in Angular and Springboot for Voicemail Management in Amazon Connect. Voxpress integrates with Voicemail Express, a feature designed to provide basic voicemail functionality to Amazon Connect. You easily manage all the voicemails your customers leave. You can listen to them, archive the ones you've handled, or assign them to someone on your team for follow-up.
 
+# Front-End
 [Go to Front End](https://github.com/pghb15/voxpress/tree/main/Front/voxpress-front)
+
+# Back-End
 [Go to Back End](https://github.com/pghb15/voxpress/tree/main/Front/voxpress-front)
 
 # More about Voicemail Express V3
