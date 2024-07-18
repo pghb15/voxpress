@@ -1,4 +1,4 @@
-# <img src="../../Docs/Img/logo.ico" alt="logo" width="25"/> Voxpress (Front End)
+# <img src="../../Docs/Img/logo.ico" alt="logo" width="25"/> Voxpress (Back End)
 
 This project was generated with Springboot Maven Project.
 
